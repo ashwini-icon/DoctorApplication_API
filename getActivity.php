@@ -284,7 +284,27 @@ class getActivity{
 
          }
         return $rrrr;
-      } 
+      }
+    
+    public function fetchAvailableSlotsForTheDay($date) {
+        $arrayOfTheSlots = array();
+        $tableName = "slots_master";
+        $select = "select * from ".$tableName;
+        $run = mysqli_query($this->con,$select);
+        while ($result = mysqli_fetch_array($run))
+        {
+            $id = $result['id'];
+            $time = $result['time'];
+            $arrayCreatedFromLeaveCalculationIfAny = array('id' => $id,
+                                                           'time' => $time,
+                                                           'availablity' => true
+                                                           );
+            
+            $finalArrayOfSlotsForDay[] = $arrayCreatedFromLeaveCalculationIfAny;
+            
+        }
+        return $finalArrayOfSlotsForDay;
+    }
 
 
 
