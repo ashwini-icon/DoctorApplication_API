@@ -231,26 +231,49 @@ class getActivity{
 
 
 
-      public function bookingApp($UserKey,$bbiId)
+      public function bookingApp($UserKey,$slot_id, $date)
       {
-         //check booking slot status
-         $tableName = "bookingstructure";
-         $nul = null;
-         $condition = "id='$bbiId' AND status='$nul'";
-         $select = "select * from ".$tableName." where ".$condition;
-         $run = mysqli_query($this->con,$select);
-         $check = mysqli_num_rows($run);
-         if($check==1)
-         {
-            $value = "status='book',uniqueId='$UserKey'";
-            $result = $this->cAction->update($tableName,$value,$condition);
-         }
-         else
-         {
-            $result = false;
-         }
+         $result = false;
+         $slot = $this->fetch_slot_from_slot_id($slot_id);
+         if ($slot != null) {
+            //check booking slot status
+            $tableName = "bookingstructure";
+            $nul = null;
+            $condition = "slot_no='$slot_id' AND date='$date'";
+            $select = "select * from ".$tableName." where ".$condition;
+            $run = mysqli_query($this->con,$select);
+            $check = mysqli_num_rows($run);
+            if($check==0)
+            {
+               $time = $slot['time'];
+               $slot_id_from_db = $slot['id'];
+               $value = "(date, time, slot_no, uniqueId, profile_id) value('$date','$time','$slot_id_from_db','$UserKey',1)";
+               $result = $this->cAction->insert($tableName, $value);
 
+            }
+         }
          return $result;
+      }
+
+      public function fetch_slot_from_slot_id($slot_id) 
+      {
+         $tableName = "slots_master";
+         $condition = "id = '$slot_id'";
+         $select = "select * from ".$tableName. " where ".$condition;
+         $result = mysqli_query($this->con, $select);
+         $returnedRows = mysqli_num_rows($result);
+         if ($returnedRows > 0) {
+            while ($rr = mysqli_fetch_array($result)) 
+            {
+               $id = $rr['id'];
+               $time = $rr['time'];
+               $slot = array('id' => $id,
+                           'time' => $time);
+            }
+            return $slot;
+         } else {
+            return null;
+         }
       }
 
 
@@ -260,8 +283,8 @@ class getActivity{
 
       public function fetchslot()
       {
-           $rrrr = array();
-        $tableName = "bookingstructure";
+         $rrrr = array();
+         $tableName = "bookingstructure";
          $select = "select * from ".$tableName;
          $run = mysqli_query($this->con,$select);
          while ($rr = mysqli_fetch_array($run)) 
@@ -284,27 +307,27 @@ class getActivity{
 
          }
         return $rrrr;
-      }
-    
-    public function fetchAvailableSlotsForTheDay($date) {
-        $arrayOfTheSlots = array();
-        $tableName = "slots_master";
-        $select = "select * from ".$tableName;
-        $run = mysqli_query($this->con,$select);
-        while ($result = mysqli_fetch_array($run))
-        {
-            $id = $result['id'];
-            $time = $result['time'];
-            $arrayCreatedFromLeaveCalculationIfAny = array('id' => $id,
-                                                           'time' => $time,
-                                                           'availablity' => true
-                                                           );
-            
-            $finalArrayOfSlotsForDay[] = $arrayCreatedFromLeaveCalculationIfAny;
-            
-        }
+      } 
+
+      public function fetchAvailableSlotsForTheDay($date) {
+         $arrayOfTheSlots = array();
+         $tableName = "slots_master";
+         $select = "select id, TIME_FORMAT(time, '%h %i %p') as 'time' from ".$tableName;
+         $run = mysqli_query($this->con,$select);
+         while ($result = mysqli_fetch_array($run)) 
+         {
+              $id = $result['id'];
+              $time = $result['time'];
+              $arrayCreatedFromLeaveCalculationIfAny = array('id' => $id,
+                          'time' => $time,
+                          'availablity' => true
+                        );
+
+              $finalArrayOfSlotsForDay[] = $arrayCreatedFromLeaveCalculationIfAny;
+
+         }
         return $finalArrayOfSlotsForDay;
-    }
+      }
 
 
 

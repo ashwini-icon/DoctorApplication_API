@@ -12,12 +12,14 @@
  	
  	public function insert($tableName,$value)
  	{
+        $result = false;
  		$insert = "insert into ".$tableName." ".$value;
  		$run = mysqli_query($this->con,$insert);
  		if($run)
  		{
  			$result = true;
- 		}return $result;
+		}
+		return $result;
  	}
 
 
