@@ -1,0 +1,1 @@
+ALTER TABLE `login_details` ADD `medical_history_self` TEXT NULL AFTER `latitude`, ADD `last_visit_date` DATE NULL AFTER `medical_history_self`, ADD `medical_history_spouse` TEXT NULL AFTER `last_visit_date`;

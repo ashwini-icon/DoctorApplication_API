@@ -98,7 +98,7 @@ class getActivity{
      public function checkuserTrue($UserKey)
      {
      	$tableName = "login_details";
-     	$condition = "randum='$UserKey'";
+     	$condition = "user_token='$UserKey'";
 
      	$select = "select * from ".$tableName." where ".$condition;
      	$run = mysqli_query($this->con,$select);
@@ -113,27 +113,54 @@ class getActivity{
      	}return $result;
      }
 
-
+    
     //user data insert/update area
-     public function updateUserData($name,$lname,$ag,$gender,$mobile,$address,$bldgrp,$height,$wght,$prnt,$kdsDetls,$UserKey)
+     public function updateUserData($firstName,
+                                    $lastName,
+                                    $age,
+                                    $gender,
+                                    $mobileNumber,
+                                    $address,
+                                    $bloodGroup,
+                                    $height,
+                                    $weight,
+                                    $medicalHistorySelf,
+                                    $lastVisitDate,
+                                    $medicalHistorySpouse,
+                                    $medicalHistoryParents,
+                                    $medicalHistoryKids,
+                                    $UserKey,
+                                    $longitude,$latitude)
      {
-     	$longt = "12.34535.34";
-     	$lat = "34.2334.33";
         $tableName = "login_details";
-        $value = "name='$name',last_name='$lname',age='$ag',gender='$gender',mobile='$mobile',address='$address',bloodgroup='$bldgrp',height='$height',weight='$wght',prents='$prnt',kidsDetails='$kdsDetls',longt='$longt',lat='$lat'";
-        $condition = "randum='$UserKey'";
+        $value = "first_name='$firstName',
+        last_name='$lastName',
+        age='$age',
+        gender='$gender',
+        mobile='$mobileNumber',
+        address='$address',
+        blood_group='$bloodGroup',
+        height='$height',
+        weight='$weight',
+        medical_history_self = '$medicalHistorySelf',
+        last_visit_date = '$lastVisitDate',
+        medical_history_spouse = '$medicalHistorySpouse',
+        medical_history_parents='$medicalHistoryParents',
+        medical_history_kids='$medicalHistoryKids',
+        longitude='$longitude',
+        latitude='$latitude'";
+        
+        $condition = "user_token ='$UserKey'";
 
         $result = $this->cAction->update($tableName,$value,$condition);
-
         if($result)
         {
-        	$result2 = true;
+        	return true;
         }
         else
         {
-        	$result2 = false;
+        	return false;
         }
-        return $result2;
      }
 
 
@@ -184,49 +211,50 @@ class getActivity{
      }
 
 
-     public function fetchData($UserKey)
+     public function fetchProfileData($UserKey)
       {
-        //now pic user data.
         $tableName = "login_details";
-        $select = "select * from ".$tableName." where randum='$UserKey'";
+        $select = "select * from ".$tableName." where user_token = '$UserKey'";
         $run = mysqli_query($this->con,$select);
         while($rr = mysqli_fetch_array($run))
         {
-          //user data here...
              $email = $rr['email'];
-             $pass = $rr['pass'];
-             $name = $rr['name'];
-             $last_name = $rr['last_name'];
+             $firstName = $rr['first_name'];
+             $lastName = $rr['last_name'];
              $gender = $rr['gender'];
-             $mobile = $rr['mobile'];
+             $mobileNumber = $rr['mobile'];
              $age = $rr['age'];
              $address = $rr['address'];
-             $bloodgroup = $rr['bloodgroup'];
+             $bloodGroup = $rr['blood_group'];
              $height = $rr['height'];
              $weight = $rr['weight'];
-             $prents = $rr['prents'];
-             $kidsDetails = $rr['kidsDetails'];
-             $long = $rr['longt'];
-             $lat = $rr['lat'];
-          //its convert to an array...
-              
+             $medicalHistorySelf = $rr['medical_history_self'];
+             $lastVisitDate = $rr['last_visit_date'];
+             $medicalHistorySpouse = $rr['medical_history_spouse'];
+             $medicalHistoryParents = $rr['parents_medical_history'];
+             $medicalHistoryKids = $rr['kids_medical_history'];
+             $longitude = $rr['longitude'];
+             $latitude = $rr['latitude'];
+    
+            return $userDetails = array('email' => $email,
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'gender' => $gender,
+                'mobile' => $mobileNumber,
+                'age' => $age,
+                'address' => $address,
+                'blood_group' => $bloodGroup,
+                'height' => $height,
+                'weight' => $weight,
+                'medical_history_self' => $medicalHistorySelf,
+                'last_visit_date' => $lastVisitDate,
+                'medical_history_spouse' => $medicalHistorySpouse,
+                'medical_history_parents' => $medicalHistoryParents,
+                'medical_history_kids' => $medicalHistoryKids,
+                'longitude' => $longitude,
+                'latitude' => $latitude );
         }
-
-         return $userDetails = array('email' => $email,
-                              'pass' => $pass,
-                              'name' => $name,
-                              'lname' => $last_name,
-                              'gender' => $gender,
-                              'mobile' => $mobile,
-                              'age' => $age,
-                              'address' => $address,
-                              'bloodgroup' => $bloodgroup,
-                              'height' => $height,
-                              'weight' => $weight,
-                              'prents' => $prents,
-                              'kidsDetails' => $kidsDetails,
-                              'long' => $long,
-                              'lat' => $lat );
+        return false;
       }
 
 
