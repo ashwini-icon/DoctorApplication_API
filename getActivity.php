@@ -16,7 +16,6 @@ class getActivity{
      {
        $tableName = "com_details";
        $condition = "where inddd='$ind'";
-
        $select = "select * from "."$tableName ".$condition;
        $run = mysqli_query($this->con,$select);
        $check = mysqli_num_rows($run);
@@ -63,35 +62,33 @@ class getActivity{
 
      public function login($userId,$passWord,$did)
      {
-
-     	//check user id and password
      	$tableName = "login_details";
-     	$condition = "email='$userId' AND pass='$passWord'";
-
+     	$condition = "email = '$userId' AND password ='$passWord'";
+     	$token = '';
+     	$responseArray = array();
      	$select = "select * from ".$tableName." where ".$condition;
      	$run = mysqli_query($this->con,$select);
      	while ($rr = mysqli_fetch_array($run)) {
-     		$randum = $rr['randum'];
+     		$token = $rr['user_token'];
      	}
      	$check = mysqli_num_rows($run);
      	if($check==1)
      	{
              $tableName  = "login_details";
-             $value = "deviceId='$did'";
-             $condition = "email='$userId'";
-
-             $result2 = $this->cAction->update($tableName,$value,$condition);
-
-            if($result2){
-             $newArray =  array('status' => 1,
-                                'randum' => $randum);
-            }
+             $value = "device_id = '$did'";
+             $condition = "email = '$userId'";
+             $updateResult = $this->cAction->update($tableName,$value,$condition);
+             if($updateResult){
+                $responseArray =  array('status' => 1,
+                                'user_token' => $token);
+             }
      	}
      	else
-     		{
-     	     $newArray =  array('status' => 2,
-                                'randum' => null );		
-     		}return $newArray;
+     	{
+     	     $responseArray =  array('status' => 2,
+                                'user_token' => $token );
+     	}
+     	return $responseArray;
      }
 
 
