@@ -20,8 +20,6 @@ if($result==1)
         {
             ?>
             {"STATUS":"SUCCESS","MESSAGE":"SLOT BOOKING SUCCESS","RESPONCE":"1","SLOTID":"<?php echo $slot_id ?>"}
-
-
             <?php
         }
         else

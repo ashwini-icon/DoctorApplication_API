@@ -320,13 +320,26 @@ class getActivity{
               $time = $result['time'];
               $arrayCreatedFromLeaveCalculationIfAny = array('id' => $id,
                           'time' => $time,
-                          'availablity' => true
+                          'availability' => $this->isSlotAvailableForTheDate($date, $id)
                         );
 
               $finalArrayOfSlotsForDay[] = $arrayCreatedFromLeaveCalculationIfAny;
 
          }
         return $finalArrayOfSlotsForDay;
+      }
+
+      public function isSlotAvailableForTheDate($date, $slotId) {
+          $tableName = "bookingstructure";
+          $select = "select * from ".$tableName." where date = '".$date."' AND slot_no = ".$slotId;
+          $run = mysqli_query($this->con,$select);
+          $returnedRows = mysqli_num_rows($run);
+          if ($returnedRows == 0) {
+              return 1;
+          }
+          else {
+              return 0;
+          }
       }
 
 

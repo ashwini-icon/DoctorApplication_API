@@ -16,30 +16,32 @@ $data = json_decode(file_get_contents("php://input"));
 $result = $fff->companyDetails($ind);
 if($result==1)
 {
-?>
-{"STATUS":"SUCCESS","MESSAGE":"","RESPONCE":"1","DATA":
-[
-<?php
-   //fetch all data
-   $resultingSlots = $fff->fetchAvailableSlotsForTheDay($inputeDate);
-    
-   foreach ($resultingSlots as $key => $value) {
-   	  $id = $value['id'];
-   	  $time = $value['time'];
-   	  $availibility = $value['availablity'];
-?>
-{"id":"<?php echo $id; ?>","time":"<?php echo $time; ?>","availibility":"<?php echo $availibility; ?>"},
-<?php
-}
-?>
+    ?>
+    {"STATUS":"SUCCESS","MESSAGE":"","RESPONCE":"1","DATA":
+    [
+    <?php
+    //fetch all data
+    $resultingSlots = $fff->fetchAvailableSlotsForTheDay($inputeDate);
+    $lastElement = end($resultingSlots);
+    foreach ($resultingSlots as $key => $value) {
+        $id = $value['id'];
+        $time = $value['time'];
+        $availibility = $value['availability'];
+        ?>
+        {"id":"<?php echo $id; ?>","time":"<?php echo $time; ?>","availibility":"<?php echo $availibility; ?>"}
+        <?php
+        if($value != $lastElement) {
+            echo ",";
+        }
+    }
+    ?>
+    ]}
 
-]}
-
-<?php
+    <?php
 }
 else
 {
-echo "Invalid User Action !!";
+    echo "Invalid User Action !!";
 }
 
 ?>
