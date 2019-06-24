@@ -18,16 +18,25 @@
         
         public function getMedicalRecord($id) {
             $tableName = "medical_record";
-            $condition = "id = '$id'";
+            $condition = "patient_id = '$id'";
             $select = "select * from ".$tableName." where ".$condition;
             $run = mysqli_query($this->connection,$select);
             $check = mysqli_num_rows($run);
-            echo 
             if($check >= 0)
             {
-                while($rr = mysqli_fetch_array($run)) {
+                $returnString = "[";
+                $index = 0;
+                while($rr = mysqli_fetch_array($run,MYSQLI_ASSOC)) {
+                    if ($index != 0){
+                        $returnString .= ", ";
+                    }
+                    $returnString .= json_encode($rr);
+                    $index++;
+                    if ($index == $check){
+                        $returnString .= "]";
+                    }
                 }
-                print_r($rr);
+                return $returnString;
             }
             else
             {
