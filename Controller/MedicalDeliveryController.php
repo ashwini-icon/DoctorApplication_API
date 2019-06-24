@@ -1,24 +1,23 @@
 <?php
     include_once 'dbaction.php';
-    class MedicalRecordController extends BaseController
+    class MedicalDeliveryController extends BaseController
     {
-        
         public function __construct()
         {
             parent::__construct();
             $this->connection = mysqli_connect("localhost","root","","doctor_app");
             $this->databaseAction = new dbAction();
         }
-        
-        public function saveMedicalRecord($nameOfMedicine, $type, $quantity, $unit, $repeatingDays, $repeatingTime, $patient_id) {
-           $tableName = "medical_record";
-           $value = "(name_of_medicine,type,quantity,unit,repeating_days,repeating_time, patient_id) VALUES ('$nameOfMedicine','$type','$quantity','$unit','$repeatingDays', '$repeatingTime', $patient_id)";
-           $result = $this->databaseAction->insert($tableName,$value);
-           return $result;
+    
+        public function saveMedicalDeliveryRecord($nameOfMedicine, $type, $quantities, $description, $deliveryAddress, $alternateContact, $extraInstruction, $patientId) {
+            $tableName = "medical_delivery";
+            $value = "(medicine_name,type,quantities, description, delivery_address,alternate_contact, extra_instruction, patient_id) VALUES ('$nameOfMedicine','$type','$quantities','$description','$deliveryAddress', '$alternateContact', $extraInstruction, $patientId)";
+            $result = $this->databaseAction->insert($tableName,$value);
+            return $result;
         }
-        
-        public function getMedicalRecord($id) {
-            $tableName = "medical_record";
+    
+        public function getMedicalDeliveryRecord($id) {
+            $tableName = "medical_delivery";
             $condition = "patient_id = '$id'";
             $select = "select * from ".$tableName." where ".$condition;
             $run = mysqli_query($this->connection,$select);
@@ -44,6 +43,4 @@
                 return false;
             }
         }
-    
-        
     }
