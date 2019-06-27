@@ -1,7 +1,7 @@
 <?php
     include_once 'dbaction.php';
     include_once 'BaseController.php';
-    class MedicalDeliveryController extends BaseController
+    class ReportsController extends BaseController
     {
         public function __construct()
         {
@@ -10,15 +10,15 @@
             $this->databaseAction = new dbAction();
         }
     
-        public function saveMedicalDeliveryRecord($nameOfMedicine, $type, $quantities, $description, $deliveryAddress, $alternateContact, $extraInstruction, $patientId) {
-            $tableName = "medical_delivery";
-            $value = "(medicine_name,type,quantities, description, delivery_address,alternate_contact, extra_instruction, patient_id) VALUES ('$nameOfMedicine','$type','$quantities','$description','$deliveryAddress', '$alternateContact', $extraInstruction, $patientId)";
+        public function saveMedicalReport($reportTitle, $reportDescription, $reportData, $patient_id) {
+            $tableName = "patient_reports";
+            $value = "(report_title,report_description,report_data,patient_id) VALUES ('$reportTitle','$reportDescription','$reportData', '$patient_id')";
             $result = $this->databaseAction->insert($tableName,$value);
             return $result;
         }
     
-        public function getMedicalDeliveryRecord($id) {
-            $tableName = "medical_delivery";
+        public function getMedicalReports($id) {
+            $tableName = "patient_reports";
             $condition = "patient_id = '$id'";
             $select = "select * from ".$tableName." where ".$condition;
             $run = mysqli_query($this->connection,$select);
@@ -45,3 +45,5 @@
             }
         }
     }
+    
+    

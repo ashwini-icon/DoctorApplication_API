@@ -1,5 +1,6 @@
 <?php
     include_once 'dbaction.php';
+    include_once 'BaseController.php';
     class HealthTIpsController extends BaseController
     {
         public function __construct()
