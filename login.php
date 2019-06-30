@@ -18,7 +18,7 @@
         if($result2==1)
         {
             
-            echo "{\"STATUS\":\"SUCCESS\",\"MESSAGE\":\"REGISTERED USER\",\"RESPONCE\":\"1\",\"TOKEN\":".$em3."}";
+            echo "{\"STATUS\":\"SUCCESS\",\"MESSAGE\":\"REGISTERED USER\",\"RESPONCE\":\"1\",\"TOKEN\":\"".$em3."\"}";
             
         }
         else

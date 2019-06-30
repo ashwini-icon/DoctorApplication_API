@@ -1,6 +1,6 @@
 <?php
-    include('Controller/ReportsController.php');
-    include('getActivity.php');
+    include_once('Controller/ReportsController.php');
+    include_once('getActivity.php');
     $reportsControllerInstance = new ReportsController;
     $activityControllerInstance = new getActivity;
     $data = json_decode(file_get_contents("php://input"));

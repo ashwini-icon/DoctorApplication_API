@@ -16,7 +16,7 @@
         if($result2==1)
         {
             $profileData = $fff->fetchProfileData($UserKey);
-            $finalResponse = "{\"STATUS\":\"SUCCESS\", \"MESSAGE\":\"PROFILE DATA FETCHED\", \"RESPONCE\":2, \"DATA\": ".json_encode($profileData)." }";
+            $finalResponse = "{\"STATUS\":\"SUCCESS\", \"MESSAGE\":\"PROFILE DATA FETCHED\", \"RESPONCE\":1, \"DATA\": ".json_encode($profileData)." }";
             echo $finalResponse;
         }
     }

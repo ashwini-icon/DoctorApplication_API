@@ -33,10 +33,8 @@
                     }
                     $returnString .= json_encode($rr);
                     $index++;
-                    if ($index == $check){
-                        $returnString .= "]";
-                    }
                 }
+                $returnString .= "]";
                 return $returnString;
             }
             else

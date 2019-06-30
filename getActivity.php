@@ -1,11 +1,11 @@
 <?php
-include 'dbaction.php';
+include_once 'dbaction.php';
 class getActivity{
 
 
      public function __construct()
        {
-          $this->con = mysqli_connect("localhost","root","","doctor_app");
+          $this->con = mysqli_connect("35.200.158.161","root","123456","doctor_app");
 
           //$this->con = mysqli_connect("localhost","pune_Apps","jIrlF4t({I#4","doctorAppli");
 
@@ -51,12 +51,13 @@ class getActivity{
      public function register($email,$pass,$rand)
      {
        $tableName = "login_details";
-       $value = "(randum,email,pass) value('$rand','$email','$pass')";
+           $value = "(user_token,email,password) value('$rand','$email','$pass')";
        $result = $this->cAction->insert($tableName,$value);
        if($result)
        {
        	 $result = true;
-       }return $result;
+       }
+       return $result;
      }
 
 
