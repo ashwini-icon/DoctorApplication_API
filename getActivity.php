@@ -5,7 +5,7 @@ class getActivity{
 
      public function __construct()
        {
-          $this->con = mysqli_connect("35.200.158.161","root","123456","doctor_app");
+          $this->con = mysqli_connect("localhost","root","","doctor_app");
 
           //$this->con = mysqli_connect("localhost","pune_Apps","jIrlF4t({I#4","doctorAppli");
 
