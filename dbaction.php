@@ -5,9 +5,19 @@
 
  	public function __construct()
  	{
- 		//$this->con = mysqli_connect("localhost","pune_Apps","jIrlF4t({I#4","doctorAppli");
-        $this->con = mysqli_connect("localhost","root","","doctor_app");
-
+ 		$servername = "mysql:unix_socket=/cloudsql/doctor-mobile-application:asia-south1:doctor-app;dbname=doctor_app";
+        $username = "root";
+        $dbname = "doctor_app";
+        $password = "123456";
+        try 
+        {
+              $this->con = new PDO($servername, $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        }
+        catch(PDOException $e) {
+             die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+            echo("Can't open the database.". $e);
+        }
+            //$this->con = new mysqli(null, $username, $password, $dbname, $servername);
  	}
  	
  	public function insert($tableName,$value)
@@ -27,7 +37,7 @@
  	public function update($tableName,$value,$condition)
  	{
  		$update = "update ".$tableName." set ".$value." where ".$condition;
- 		$run = mysqli_query($this->con,$update);
+ 		$run = $this->con->query($update);
  		if($run)
  		{
  			$result = true;

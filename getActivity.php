@@ -4,21 +4,29 @@ class getActivity{
 
 
      public function __construct()
-       {
-          $this->con = mysqli_connect("localhost","root","","doctor_app");
-
-          //$this->con = mysqli_connect("localhost","pune_Apps","jIrlF4t({I#4","doctorAppli");
-
-          $this->cAction = new dbAction();
+      {
+        $servername = "mysql:unix_socket=/cloudsql/doctor-mobile-application:asia-south1:doctor-app;dbname=doctor_app";
+        $username = "root";
+        $dbname = "doctor_app";
+        $password = "123456";
+        try 
+        {
+            $this->con = new PDO($servername, $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+        }
+        catch(PDOException $e) {
+            die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+            echo("Can't open the database.". $e);
+        }
+        $this->cAction = new dbAction();
        }
-
      public function companyDetails($ind)
      {
        $tableName = "com_details";
        $condition = "where inddd='$ind'";
        $select = "select * from "."$tableName ".$condition;
-       $run = mysqli_query($this->con,$select);
-       $check = mysqli_num_rows($run);
+       
+       $run = $this->con->query($select);
+       $check = $run->rowCount();
        if($check==1)
        {
           $result = true;
@@ -68,11 +76,11 @@ class getActivity{
      	$token = '';
      	$responseArray = array();
      	$select = "select * from ".$tableName." where ".$condition;
-     	$run = mysqli_query($this->con,$select);
-     	while ($rr = mysqli_fetch_array($run)) {
+     	$run = $this->con->query($select);
+     	while ($rr = $run->fetch()) {
      		$token = $rr['user_token'];
      	}
-     	$check = mysqli_num_rows($run);
+     	$check = $run->rowCount();
      	if($check==1)
      	{
              $tableName  = "login_details";
