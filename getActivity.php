@@ -107,7 +107,7 @@ class getActivity{
      	$condition = "user_token='$UserKey'";
 
      	$select = "select * from ".$tableName." where ".$condition;
-     	$run = $this->con->query($this->con,$select);
+     	$run = $this->con->query($select);
      	$check = $run->rowCount();
      	if($check==1)
      	{
