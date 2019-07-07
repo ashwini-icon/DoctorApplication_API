@@ -18,10 +18,10 @@
     
     $result = $activityControllerInstance->companyDetails($idd);
     if ($result == 1) {
-        $validUserData = $medicalControllerInstance->getUserFromToken($token);
+        $validUserData = $medicalDeliveryControllerInstance->getUserFromToken($token);
         if ($validUserData != null){
             $patientId = $validUserData['id'];
-            $resultOfSavingMedicalData = $medicalControllerInstance->saveMedicalDeliveryRecord($nameOfMedicine, $type, $quantities, $description, $deliveryAddress, $alternateContact, $extraInstruction, $patientId);
+            $resultOfSavingMedicalData = $medicalDeliveryControllerInstance->saveMedicalDeliveryRecord($nameOfMedicine, $type, $quantities, $description, $deliveryAddress, $alternateContact, $extraInstruction, $patientId);
             if ($resultOfSavingMedicalData) {
                 echo "{\"STATUS\":\"SUCCESS\",\"MESSAGE\":\"UPDATE SUCCESS\",\"RESPONCE\":1}";
             }
