@@ -43,8 +43,8 @@ class getActivity{
        $condition = "where email='$email'";
 
        $select = "select * from "."$tableName ".$condition;
-       $run = mysqli_query($this->con,$select);
-       $check = mysqli_num_rows($run);
+       $run = $this->con->query($select);
+       $check = $run->rowCount();
        if($check==1)
        {
        	 $result = false;
