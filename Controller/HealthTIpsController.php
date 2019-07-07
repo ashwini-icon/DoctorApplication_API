@@ -6,7 +6,18 @@
         public function __construct()
         {
             parent::__construct();
-            $this->connection = mysqli_connect("localhost","root","","doctor_app");
+            $servername = "mysql:unix_socket=/cloudsql/doctor-mobile-application:asia-south1:doctor-app;dbname=doctor_app";
+            $username = "root";
+            $dbname = "doctor_app";
+            $password = "123456";
+            try
+            {
+                $this->connection = new PDO($servername, $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            }
+            catch(PDOException $e) {
+                die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+                echo("Can't open the database.". $e);
+            }
             $this->databaseAction = new dbAction();
         }
     
@@ -20,13 +31,13 @@
         public function getHealthTips() {
             $tableName = "health_tips";
             $select = "select * from ".$tableName;
-            $run = mysqli_query($this->connection,$select);
-            $check = mysqli_num_rows($run);
+            $run = $this->connection->query($select);
+            $check = $run->rowCount();
             if($check >= 0)
             {
                 $returnString = "[";
                 $index = 0;
-                while($rr = mysqli_fetch_array($run,MYSQLI_ASSOC)) {
+                while($rr = $run->fetch(MYSQLI_ASSOC)) {
                     if ($index != 0){
                         $returnString .= ", ";
                     }

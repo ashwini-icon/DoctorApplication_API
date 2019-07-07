@@ -4,7 +4,18 @@
     {
         public function __construct()
         {
-            $this->connection = mysqli_connect("localhost","root","","doctor_app");
+            $servername = "mysql:unix_socket=/cloudsql/doctor-mobile-application:asia-south1:doctor-app;dbname=doctor_app";
+            $username = "root";
+            $dbname = "doctor_app";
+            $password = "123456";
+            try
+            {
+                $this->connection = new PDO($servername, $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            }
+            catch(PDOException $e) {
+                die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+                echo("Can't open the database.". $e);
+            }
             $this->databaseAction = new dbAction();
         }
     
@@ -13,11 +24,11 @@
             $tableName = "login_details";
             $condition = "user_token='$UserKey'";
             $select = "select * from ".$tableName." where ".$condition;
-            $run = mysqli_query($this->connection,$select);
-            $check = mysqli_num_rows($run);
+            $run = $this->connection->query($select);
+            $check = $run->rowCount();
             if($check==1)
             {
-                while($rr = mysqli_fetch_array($run))
+                while($rr = $run->fetch())
                 {
                     return $userDetails =
                         array('id' => $rr['id'],

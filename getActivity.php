@@ -107,8 +107,8 @@ class getActivity{
      	$condition = "user_token='$UserKey'";
 
      	$select = "select * from ".$tableName." where ".$condition;
-     	$run = mysqli_query($this->con,$select);
-     	$check = mysqli_num_rows($run);
+     	$run = $this->con->query($this->con,$select);
+     	$check = $run->rowCount();
      	if($check==1)
      	{
      		$result = true;
@@ -221,8 +221,8 @@ class getActivity{
       {
         $tableName = "login_details";
         $select = "select * from ".$tableName." where user_token = '$UserKey'";
-        $run = mysqli_query($this->con,$select);
-        while($rr = mysqli_fetch_array($run))
+        $run = $this->con->query($select);
+        while($rr = $run->fetch())
         {
              $email = $rr['email'];
              $firstName = $rr['first_name'];
@@ -275,8 +275,8 @@ class getActivity{
             $nul = null;
             $condition = "slot_no='$slot_id' AND date='$date'";
             $select = "select * from ".$tableName." where ".$condition;
-            $run = mysqli_query($this->con,$select);
-            $check = mysqli_num_rows($run);
+            $run = $this->con->query($select);
+            $check = $run->rowCount();
             if($check==0)
             {
                $time = $slot['time'];
@@ -294,10 +294,10 @@ class getActivity{
          $tableName = "slots_master";
          $condition = "id = '$slot_id'";
          $select = "select * from ".$tableName. " where ".$condition;
-         $result = mysqli_query($this->con, $select);
-         $returnedRows = mysqli_num_rows($result);
+         $result = $this->con->query($select);
+         $returnedRows = $result->rowCount();
          if ($returnedRows > 0) {
-            while ($rr = mysqli_fetch_array($result)) 
+            while ($rr = $result->fetch())
             {
                $id = $rr['id'];
                $time = $rr['time'];
@@ -320,8 +320,8 @@ class getActivity{
          $rrrr = array();
          $tableName = "bookingstructure";
          $select = "select * from ".$tableName;
-         $run = mysqli_query($this->con,$select);
-         while ($rr = mysqli_fetch_array($run)) 
+         $run = $this->con->query($select);
+         while ($rr = $run->fetch())
          {
               $id = $rr['id'];
               $date = $rr['date'];
@@ -347,8 +347,8 @@ class getActivity{
          $arrayOfTheSlots = array();
          $tableName = "slots_master";
          $select = "select id, TIME_FORMAT(time, '%h %i %p') as 'time' from ".$tableName;
-         $run = mysqli_query($this->con,$select);
-         while ($result = mysqli_fetch_array($run)) 
+         $run = $this->con->query($select);
+         while ($result = $run->fetch())
          {
               $id = $result['id'];
               $time = $result['time'];
@@ -366,8 +366,8 @@ class getActivity{
       public function isSlotAvailableForTheDate($date, $slotId) {
           $tableName = "bookingstructure";
           $select = "select * from ".$tableName." where date = '".$date."' AND slot_no = ".$slotId;
-          $run = mysqli_query($this->con,$select);
-          $returnedRows = mysqli_num_rows($run);
+          $run = $this->con->query($select);
+          $returnedRows = $run->rowCount();
           if ($returnedRows == 0) {
               return 1;
           }

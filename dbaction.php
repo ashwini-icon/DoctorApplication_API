@@ -9,22 +9,20 @@
         $username = "root";
         $dbname = "doctor_app";
         $password = "123456";
-        try 
-        {
+        try {
               $this->con = new PDO($servername, $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         }
         catch(PDOException $e) {
-             die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
+            die(json_encode(array('outcome' => false, 'message' => 'Unable to connect')));
             echo("Can't open the database.". $e);
         }
-            //$this->con = new mysqli(null, $username, $password, $dbname, $servername);
  	}
  	
  	public function insert($tableName,$value)
  	{
         $result = false;
  		$insert = "insert into ".$tableName." ".$value;
- 		$run = mysqli_query($this->con,$insert);
+ 		$run = $this->con->query($this->con,$insert);
  		if($run)
  		{
  			$result = true;
