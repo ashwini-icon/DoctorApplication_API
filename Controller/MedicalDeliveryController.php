@@ -12,7 +12,7 @@
     
         public function saveMedicalDeliveryRecord($nameOfMedicine, $type, $quantities, $description, $deliveryAddress, $alternateContact, $extraInstruction, $patientId) {
             $tableName = "medical_delivery";
-            $value = "(medicine_name,type,quantities, description, delivery_address,alternate_contact, extra_instruction, patient_id) VALUES ('$nameOfMedicine','$type','$quantities','$description','$deliveryAddress', '$alternateContact', $extraInstruction, $patientId)";
+            $value = "(medicine_name,type,quantities, description, delivery_address,alternate_contact, extra_instruction, patient_id) VALUES ('$nameOfMedicine','$type','$quantities','$description','$deliveryAddress', '$alternateContact', '$extraInstruction', $patientId)";
             $result = $this->databaseAction->insert($tableName,$value);
             return $result;
         }
@@ -33,10 +33,8 @@
                     }
                     $returnString .= json_encode($rr);
                     $index++;
-                    if ($index == $check){
-                        $returnString .= "]";
-                    }
                 }
+                $returnString .= "]";
                 return $returnString;
             }
             else
