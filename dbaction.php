@@ -22,7 +22,7 @@
  	{
         $result = false;
  		$insert = "insert into ".$tableName." ".$value;
- 		$run = $this->con->query($this->con,$insert);
+ 		$run = $this->con->query($insert);
  		if($run)
  		{
  			$result = true;
