@@ -38,7 +38,7 @@
             {
                 $returnString = "[";
                 $index = 0;
-                while($rr = $run->fetch($run,MYSQLI_ASSOC)) {
+                while($rr = $run->fetch(MYSQLI_ASSOC)) {
                     if ($index != 0){
                         $returnString .= ", ";
                     }
