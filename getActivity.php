@@ -151,8 +151,8 @@ class getActivity{
         medical_history_self = '$medicalHistorySelf',
         last_visit_date = '$lastVisitDate',
         medical_history_spouse = '$medicalHistorySpouse',
-        medical_history_parents='$medicalHistoryParents',
-        medical_history_kids='$medicalHistoryKids',
+        parents_medical_history='$medicalHistoryParents',
+        kids_medical_history='$medicalHistoryKids',
         longitude='$longitude',
         latitude='$latitude'";
         
