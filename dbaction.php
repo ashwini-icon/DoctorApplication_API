@@ -6,7 +6,7 @@
  	public function __construct()
  	{
  		//$this->con = mysqli_connect("localhost","pune_Apps","jIrlF4t({I#4","doctorAppli");
-        $this->con = mysqli_connect("localhost","root","","doctor_app");
+        $this->con = mysqli_connect("localhost","id10488024_doctor_app","123456","id10488024_doctor_app");
 
  	}
  	
@@ -26,7 +26,8 @@
 
  	public function update($tableName,$value,$condition)
  	{
- 		$update = "update ".$tableName." set ".$value." where ".$condition;
+		$update = "update ".$tableName." set ".$value." where ".$condition;
+		//echo $update; 
  		$run = mysqli_query($this->con,$update);
  		if($run)
  		{

@@ -24,10 +24,11 @@
     @$latitude = $data->latitude;
     
     
-    
+    //echo "into api call";
     $result = $fff->companyDetails($ind);
     if($result==1)
     {
+        //echo "result == 1 found";
         //check user true or not
         $result2 = $fff->checkuserTrue($UserKey);
         if($result2==1)
@@ -36,9 +37,13 @@
             $result3 = $fff->updateUserData($firstName,$lastName,$age,$gender,$mobileNumber,$address,$bloodGroup,$height,$weight,$medicalHistorySelf,$lastVisitDate,$medicalHistorySpouse,$medicalHistoryParents,$medicalHistoryKids,$UserKey,$longitude,$latitude);
             if($result3)
             {
-                
+                //echo "result == 3 found";
                 echo "{\"STATUS\":\"SUCCESS\",\"MESSAGE\":\"UPDATE SUCCESS\",\"RESPONCE\":1}";
                 
+            }
+            else {
+                //echo "result == 3 not found";
+                echo $result3;
             }
         }
         else

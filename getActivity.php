@@ -5,7 +5,7 @@ class getActivity{
 
      public function __construct()
        {
-          $this->con = mysqli_connect("localhost","root","","doctor_app");
+          $this->con = mysqli_connect("localhost","id10488024_doctor_app","123456","id10488024_doctor_app");
 
           //$this->con = mysqli_connect("localhost","pune_Apps","jIrlF4t({I#4","doctorAppli");
 
@@ -143,8 +143,8 @@ class getActivity{
         medical_history_self = '$medicalHistorySelf',
         last_visit_date = '$lastVisitDate',
         medical_history_spouse = '$medicalHistorySpouse',
-        medical_history_parents='$medicalHistoryParents',
-        medical_history_kids='$medicalHistoryKids',
+        parents_medical_history='$medicalHistoryParents',
+        kids_medical_history='$medicalHistoryKids',
         longitude='$longitude',
         latitude='$latitude'";
         
