@@ -22,6 +22,11 @@
     @$UserKey = $data->usrkey;
     @$longitude = $data->longitude;
     @$latitude = $data->latitude;
+    @$heart_rate = $data->heart_rate;
+    @$blood_pressure = $data->blood_pressure;
+    @$pulse_rate = $data->pulse_rate;
+    @$calories = $data->calories;
+    
     
     
     //echo "into api call";
@@ -34,7 +39,7 @@
         if($result2==1)
         {
             //this user true now insert/Update there data into database
-            $result3 = $fff->updateUserData($firstName,$lastName,$age,$gender,$mobileNumber,$address,$bloodGroup,$height,$weight,$medicalHistorySelf,$lastVisitDate,$medicalHistorySpouse,$medicalHistoryParents,$medicalHistoryKids,$UserKey,$longitude,$latitude);
+            $result3 = $fff->updateUserData($firstName,$lastName,$age,$gender,$mobileNumber,$address,$bloodGroup,$height,$weight,$medicalHistorySelf,$lastVisitDate,$medicalHistorySpouse,$medicalHistoryParents,$medicalHistoryKids,$UserKey,$longitude,$latitude, $heart_rate, $blood_pressure, $pulse_rate, $calories);
             if($result3)
             {
                 //echo "result == 3 found";

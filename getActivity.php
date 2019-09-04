@@ -128,7 +128,12 @@ class getActivity{
                                     $medicalHistoryParents,
                                     $medicalHistoryKids,
                                     $UserKey,
-                                    $longitude,$latitude)
+                                    $longitude,
+                                    $latitude,
+                                    $heart_rate, 
+                                    $blood_pressure, 
+                                    $pulse_rate, 
+                                    $calories)
      {
         $tableName = "login_details";
         $value = "first_name='$firstName',
@@ -146,7 +151,11 @@ class getActivity{
         parents_medical_history='$medicalHistoryParents',
         kids_medical_history='$medicalHistoryKids',
         longitude='$longitude',
-        latitude='$latitude'";
+        latitude='$latitude',
+        heart_rate='$heart_rate',
+        blood_pressure='$blood_pressure',
+        pulse_rate='$pulse_rate',
+        calories='$calories'";
         
         $condition = "user_token ='$UserKey'";
 
@@ -233,6 +242,10 @@ class getActivity{
              $medicalHistoryKids = $rr['kids_medical_history'];
              $longitude = $rr['longitude'];
              $latitude = $rr['latitude'];
+             $heart_rate = $rr['heart_rate'];
+             $blood_pressure = $rr['blood_pressure'];
+             $pulse_rate = $rr['pulse_rate'];
+             $calories = $rr['calories'];
     
             return $userDetails = array('email' => $email,
                 'first_name' => $firstName,
@@ -250,7 +263,11 @@ class getActivity{
                 'medical_history_parents' => $medicalHistoryParents,
                 'medical_history_kids' => $medicalHistoryKids,
                 'longitude' => $longitude,
-                'latitude' => $latitude );
+                'latitude' => $latitude,
+                'heart_rate' => $heart_rate, 
+                'blood_pressure' => $blood_pressure, 
+                'pulse_rate' => $pulse_rate, 
+                'calories' => $calories );
         }
         return false;
       }
