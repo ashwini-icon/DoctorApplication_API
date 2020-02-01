@@ -68,7 +68,10 @@ class getActivity{
      	$token = '';
      	$responseArray = array();
      	$select = "select * from ".$tableName." where ".$condition;
-     	$run = mysqli_query($this->con,$select);
+      $run = mysqli_query($this->con,$select);
+      if (!$run) {
+         printf("Errormessage: %s\n", mysqli_error($this->con));
+      }
      	while ($rr = mysqli_fetch_array($run)) {
      		$token = $rr['user_token'];
      	}
