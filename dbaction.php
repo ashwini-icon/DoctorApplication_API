@@ -6,7 +6,7 @@
  	public function __construct()
  	{
  		//$this->con = mysqli_connect("localhost","pune_Apps","jIrlF4t({I#4","doctorAppli");
-        $this->con = mysqli_connect("localhost","root","","doctor_app");
+        $this->con = mysqli_connect("194.59.165.24","abhash","abhash@123456","doctor_app");
 
  	}
  	

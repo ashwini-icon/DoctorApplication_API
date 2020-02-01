@@ -7,7 +7,7 @@
         public function __construct()
         {
             parent::__construct();
-            $this->connection = mysqli_connect("localhost","root","","doctor_app");
+            $this->connection = mysqli_connect("194.59.165.24","abhash","abhash@123456","doctor_app");
             $this->databaseAction = new dbAction();
         }
         
