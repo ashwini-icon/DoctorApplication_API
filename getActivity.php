@@ -69,42 +69,23 @@ class getActivity{
      	$responseArray = array();
      	$select = "select * from ".$tableName." where ".$condition;
       $run = mysqli_query($this->con,$select);
-      if (!$run) {
-         echo "Errormessage: %s\n", mysqli_error($this->con);
-      }
-      else{
-         echo "no error";
-         echo "useridf";
-         echo $userId;
-         echo "Password";
-         echo $passWord;
-         echo "Select";
-         echo $select;
-      }
      	while ($rr = mysqli_fetch_array($run)) {
-           echo "rr";
-           echo $rr;
      		$token = $rr['user_token'];
      	}
-        $check = mysqli_num_rows($run);
-        echo "check";
-        echo $check;
+      $check = mysqli_num_rows($run);
      	if($check==1)
      	{
-           echo "inside check == 1";
              $tableName  = "login_details";
              $value = "device_id = '$did'";
              $condition = "email = '$userId'";
              $updateResult = $this->cAction->update($tableName,$value,$condition);
              if($updateResult){
-               echo "inside check == 1 followed of update";
                 $responseArray =  array('status' => 1,
                                 'user_token' => $token);
              }
      	}
      	else
      	{
-         echo "inside check != 1";
      	     $responseArray =  array('status' => 2,
                                 'user_token' => $token );
      	}
