@@ -21,10 +21,11 @@
     $result = $fff->companyDetails($ind);
     if($result==1)
     {
-        echo "company detail found"
+        echo "company detail found";
         $result = $fff->checkUserStatus($email);
         if($result==1)
         {
+            echo "users detail found";
             $result = $fff->register($email,$pass,$rand);
             if($result==1)
             {
