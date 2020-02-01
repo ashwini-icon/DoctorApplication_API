@@ -72,6 +72,10 @@ class getActivity{
       if (!$run) {
          echo "Errormessage: %s\n", mysqli_error($this->con);
       }
+      else{
+         echo "no error";
+         echo $run;
+      }
      	while ($rr = mysqli_fetch_array($run)) {
      		$token = $rr['user_token'];
      	}
