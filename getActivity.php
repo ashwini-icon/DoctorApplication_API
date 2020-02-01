@@ -75,8 +75,11 @@ class getActivity{
       else{
          echo "no error";
          echo $run;
+         echo "useridf";
          echo $userId;
+         echo "Password";
          echo $passWord;
+         echo "Select";
          echo $select;
       }
      	while ($rr = mysqli_fetch_array($run)) {
