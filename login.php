@@ -10,7 +10,7 @@
     $did = $data->did;
     
     echo "Data : ";
-    echo $data;
+    var_dump($data)
     $result = $fff->companyDetails($ind);
     if($result==1)
     {
