@@ -91,17 +91,20 @@ class getActivity{
         echo $check;
      	if($check==1)
      	{
+           echo "inside check == 1";
              $tableName  = "login_details";
              $value = "device_id = '$did'";
              $condition = "email = '$userId'";
              $updateResult = $this->cAction->update($tableName,$value,$condition);
              if($updateResult){
+               echo "inside check == 1 followed of update";
                 $responseArray =  array('status' => 1,
                                 'user_token' => $token);
              }
      	}
      	else
      	{
+         echo "inside check != 1";
      	     $responseArray =  array('status' => 2,
                                 'user_token' => $token );
      	}

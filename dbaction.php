@@ -26,14 +26,18 @@
 
  	public function update($tableName,$value,$condition)
  	{
- 		$update = "update ".$tableName." set ".$value." where ".$condition;
+		 $update = "update ".$tableName." set ".$value." where ".$condition;
+		 echo "update query";
+		 echo $update;
  		$run = mysqli_query($this->con,$update);
  		if($run)
  		{
- 			$result = true;
+			 $result = true;
+			 echo "resulted true";
  		}
  		else{
- 			$result = false;
+			 $result = false;
+			 echo "result false";
  		}
  		return $result;
  	}
