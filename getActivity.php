@@ -74,7 +74,6 @@ class getActivity{
       }
       else{
          echo "no error";
-         echo $run;
          echo "useridf";
          echo $userId;
          echo "Password";
