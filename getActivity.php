@@ -75,6 +75,9 @@ class getActivity{
       else{
          echo "no error";
          echo $run;
+         echo $userId;
+         echo $passWord;
+         echo $select;
       }
      	while ($rr = mysqli_fetch_array($run)) {
      		$token = $rr['user_token'];
