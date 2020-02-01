@@ -13,10 +13,14 @@
  	public function insert($tableName,$value)
  	{
         $result = false;
- 		$insert = "insert into ".$tableName." ".$value;
+		 $insert = "insert into ".$tableName." ".$value;
+		 echo "insertt copmmand";
+		 echo $insert;
+
  		$run = mysqli_query($this->con,$insert);
  		if($run)
  		{
+			 echo "executing the query done";
  			$result = true;
 		}
 		return $result;

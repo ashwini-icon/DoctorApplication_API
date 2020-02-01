@@ -9,9 +9,19 @@
     
     @$rand = md5("$email");
     
+    echo "Data : ";
+    echo "Email : ";
+   echo $data->email;
+   echo "Password : ";
+   echo $data->pass;
+   echo "iddd : ";
+   echo $data->idd;
+   echo "rand : ";
+   echo $data->rand;
     $result = $fff->companyDetails($ind);
     if($result==1)
     {
+        echo "company detail found"
         $result = $fff->checkUserStatus($email);
         if($result==1)
         {

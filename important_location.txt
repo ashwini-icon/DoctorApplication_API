@@ -1,0 +1,7 @@
+/etc/php/7.2/apache2  ==> PHP.ini
+
+
+cat /var/log/apache2/error.log   ==> APACHE LOG
+
+
+/var/www/html/DoctorApplication_API  ==> DOC API 
