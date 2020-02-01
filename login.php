@@ -9,7 +9,8 @@
     $ind = $data->idd;
     $did = $data->did;
     
-    echo "Data : ".$data;
+    echo "Data : ";
+    echo $data;
     $result = $fff->companyDetails($ind);
     if($result==1)
     {
