@@ -82,9 +82,13 @@ class getActivity{
          echo $select;
       }
      	while ($rr = mysqli_fetch_array($run)) {
+           echo "rr";
+           echo $rr;
      		$token = $rr['user_token'];
      	}
-     	$check = mysqli_num_rows($run);
+        $check = mysqli_num_rows($run);
+        echo "check";
+        echo $check;
      	if($check==1)
      	{
              $tableName  = "login_details";
