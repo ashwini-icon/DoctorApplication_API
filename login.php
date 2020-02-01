@@ -10,7 +10,14 @@
     $did = $data->did;
     
     echo "Data : ";
-    var_dump($data)
+    echo "Email : ";
+   echo $data->email;
+   echo "Password : ";
+   echo $data->password;
+   echo "iddd : ";
+   echo $data->idd;
+   echo "DID : ";
+   echo $data->did;
     $result = $fff->companyDetails($ind);
     if($result==1)
     {
